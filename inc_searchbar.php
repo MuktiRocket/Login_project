@@ -86,9 +86,7 @@
           Settings
         </a>
         <a class="dropdown-item">
-          <i class="mdi mdi-logout text-primary"></i>
-          <a href="logout.php">Logout</a>
-
+          <i class="mdi mdi-logout text-primary"><a href="logout.php">Logout</a></i>
         </a>
       </div>
     </li>

@@ -1,13 +1,23 @@
 <?php
 $username = '';
 $result = '';
-
+$active = '';
 include_once("session.php");
 include("pdo_connect.php");
+include("db_connect.php");
 session_start();
 $username =  $_SESSION['user'];
 include_once("pdo_connect.php");
-$query = $pdo->prepare("SELECT * FROM userblog ORDER BY created_at DESC");
+$limit = 3;
+if (isset($_GET['page'])) {
+  $page = $_GET['page'];
+} else {
+  $page = 1;
+}
+$offset = ($page - 1) * $limit;
+
+
+$query = $pdo->prepare("SELECT * FROM userblog ORDER BY created_at DESC LIMIT {$offset},{$limit}");
 $query->execute();
 $result = $query->fetchAll();
 $adminCheck = $pdo->prepare("SELECT is_admin FROM user WHERE username = '$username'");
@@ -37,7 +47,7 @@ $res = $res['is_admin'];
 
       <?php require_once('inc_searchbar.php'); ?>
     </nav>
-    <!-- partial -->0
+    <!-- partial -->
     <div class="container-fluid page-body-wrapper">
       <!-- partial:partials/_sidebar.html -->
       <?php require_once('inc_sidebarnav.php'); ?>
@@ -72,7 +82,8 @@ $res = $res['is_admin'];
             </div>
           </div>
           <?php
-          if ($res == 1) { ?> <a href="adminRegister.php"><button type="submit" class="btn btn-secondary">Create New User</button></a>
+          echo 'Page: ' . $page;
+          if ($res == 1) { ?> <br><br><a href="adminRegister.php"><button type="submit" class="btn btn-secondary">Create New User</button></a>
           <?php } ?>
           <?php
           foreach ($result as $row) { ?>
@@ -103,9 +114,28 @@ $res = $res['is_admin'];
             </div>
 
           <?php }
+
+          $sql = "SELECT * FROM user";
+          $result1 = mysqli_query($conn, $sql) or die("query failed");
+
+          echo '<ul class="pagination admin-pagination">';
+          if (mysqli_num_rows($result1) > 0) {
+            $totalRecords = mysqli_num_rows($result1);
+            $totalPage = ceil($totalRecords / $limit);
+
+            for ($i = 1; $i <= $totalPage; $i++) {
+
+              if ($i == $page) {
+                $color = "blue";
+              } else {
+                $active = "";
+              }
+              echo '<li  class ="' . $active . '"><a href ="dashboard.php?page=' . $i . '"><button style="color: ;" id= "button' . $i . '" onclick="clickFun(' . $i . ')">' . $i . '</button></a></li>';
+            }
+            echo '</ul>';
+          }
+
           ?>
-          <!-- content-wrapper ends -->
-          <!-- partial:partials/_footer.html -->
           <?php require_once('inc_footer.php'); ?>
           <!-- partial -->
         </div>
@@ -119,5 +149,11 @@ $res = $res['is_admin'];
 
     <?php require_once('inc_scripts.php'); ?>
 </body>
+<script>
+  function clickFun(id) {
+    $(this).css('color', 'blue');
+
+  }
+</script>
 
 </html>
