@@ -2,7 +2,7 @@
 $username = '';
 $result = '';
 $active = '';
-$i = '';
+$i = 0;
 include_once("session.php");
 include("pdo_connect.php");
 include("db_connect.php");
@@ -111,13 +111,13 @@ $res = $res['is_admin'];
           if (mysqli_num_rows($result1) > 0) {
             $totalRecords = mysqli_num_rows($result1);
             $totalPage = ceil($totalRecords / $limit);
-            if ($i == $page) {
-              $active = 'blue';
-            } else {
-              $active = "white";
-            }
             for ($i = 1; $i <= $totalPage; $i++) {
-              echo '<li><a style="color:' . $active . ';"href ="dashboard.php?page=' . $i . '"><button>' . $i . '</button></a></li>';
+              if ($i == $page) {
+                $active = 'blue';
+              } else {
+                $active = "red";
+              }
+              echo '<li><a href ="dashboard.php?page=' . $i . '"><button style="color:' .  $active . ';">' . $i . '</button></a></li>';
             }
             echo '</ul>';
           }
