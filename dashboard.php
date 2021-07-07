@@ -2,6 +2,7 @@
 $username = '';
 $result = '';
 $active = '';
+$i = '';
 include_once("session.php");
 include("pdo_connect.php");
 include("db_connect.php");
@@ -66,18 +67,6 @@ $res = $res['is_admin'];
 
                   </div>
                 </div>
-                <div class="d-flex justify-content-between align-items-end flex-wrap">
-                  <button type="button" class="btn btn-light bg-white btn-icon mr-3 d-none d-md-block ">
-                    <i class="mdi mdi-download text-muted"></i>
-                  </button>
-                  <button type="button" class="btn btn-light bg-white btn-icon mr-3 mt-2 mt-xl-0">
-                    <i class="mdi mdi-clock-outline text-muted"></i>
-                  </button>
-                  <button type="button" class="btn btn-light bg-white btn-icon mr-3 mt-2 mt-xl-0">
-                    <i class="mdi mdi-plus text-muted"></i>
-                  </button>
-
-                </div>
               </div>
             </div>
           </div>
@@ -122,15 +111,13 @@ $res = $res['is_admin'];
           if (mysqli_num_rows($result1) > 0) {
             $totalRecords = mysqli_num_rows($result1);
             $totalPage = ceil($totalRecords / $limit);
-
+            if ($i == $page) {
+              $active = 'blue';
+            } else {
+              $active = "white";
+            }
             for ($i = 1; $i <= $totalPage; $i++) {
-
-              if ($i == $page) {
-                $color = "blue";
-              } else {
-                $active = "";
-              }
-              echo '<li  class ="' . $active . '"><a href ="dashboard.php?page=' . $i . '"><button style="color: ;" id= "button' . $i . '" onclick="clickFun(' . $i . ')">' . $i . '</button></a></li>';
+              echo '<li><a style="color:' . $active . ';"href ="dashboard.php?page=' . $i . '"><button>' . $i . '</button></a></li>';
             }
             echo '</ul>';
           }
@@ -146,14 +133,7 @@ $res = $res['is_admin'];
       <!-- page-body-wrapper ends -->
     </div>
     <!-- container-scroller -->
-
     <?php require_once('inc_scripts.php'); ?>
 </body>
-<script>
-  function clickFun(id) {
-    $(this).css('color', 'blue');
-
-  }
-</script>
 
 </html>
