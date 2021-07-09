@@ -18,24 +18,24 @@
         <ul class="nav flex-column sub-menu">
           <li> <a class="nav-link" href="create_blog.php">--> Create new Blog</a></li>
           <li><a class="nav-link" href="listing.php"> --> My Blog List</a></li>
+          <li><a class="nav-link" href="mygallery.php"> --> My Gallery</a></li>
+        </ul>
+      </div>
     </li>
-  </ul>
-  </div>
-  </li>
 
-  <li class="nav-item">
-    <a class="nav-link" data-toggle="collapse" href="#category" aria-expanded="false" aria-controls="category">
-      <i class="mdi mdi-view-grid menu-icon"></i>
-      <span class="menu-title">Category</span>
-      <i class="menu-arrow"></i>
-    </a>
-    <div class="collapse" id="category">
-      <ul class="nav flex-column sub-menu">
-        <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Category </a></li>
-        <li class="nav-item"> <a class="nav-link" href="pages/samples/login-2.html"> Add New Category </a></li>
-      </ul>
-    </div>
-  </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="collapse" href="#category" aria-expanded="false" aria-controls="category">
+        <i class="mdi mdi-view-grid menu-icon"></i>
+        <span class="menu-title">Category</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="category">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Category </a></li>
+          <li class="nav-item"> <a class="nav-link" href="pages/samples/login-2.html"> Add New Category </a></li>
+        </ul>
+      </div>
+    </li>
 
 
   </ul>

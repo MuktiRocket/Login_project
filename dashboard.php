@@ -6,7 +6,6 @@ $i = 0;
 include_once("session.php");
 include("pdo_connect.php");
 include("db_connect.php");
-session_start();
 $username =  $_SESSION['user'];
 include_once("pdo_connect.php");
 $limit = 3;
